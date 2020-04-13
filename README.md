@@ -114,3 +114,9 @@
    </configuration>
  </plugin>
 ```
+## Example
+
+ Simple project with pure documentation [here](./example/sb-rest-doclet-example)
+ 
+ And resulted documentation [here](./example/sb-rest-doclet-example-result/site/apidocs/index-rest.html)
+

@@ -1,0 +1,255 @@
+<html>
+ <head>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href="../css/main.css">
+ </head>
+ <body> <div class="main-container rests">
+ <div class="main-background">
+	 
+     <div class="menu">
+		 <span class="menu-item rests"><a href="../index-rest.html">controllers</a></span>
+		 <span class="menu-item models"><a href="../index-model.html">model</a></span>
+	 </div>
+  
+     <div class="header">ExampleController</div>
+  
+     <hr/>
+  
+      <div>
+            Root path: <span class="path">/example</span>
+      </div>
+<div class="javadoc">
+<div><b> Example of spring boot controller.</b>  Provides some examples of 
+ REST api definitions.
+</div>
+</div>
+
+<div class="annotations">
+<div>@CrossOrigin</div>
+<div>@RestController</div>
+<div>@RequestMapping(path={"/example"})</div>
+</div>
+
+  <hr/>
+
+  	<table class="rest-list">
+        <tr><td> <span class="method">GET</span></td> <td><a href="#-1502588249"><span class=path>/example/book</span></a></td> <td> Search for books.</td> </tr>
+        <tr><td> <span class="method">POST</span></td> <td><a href="#-770412163"><span class=path>/example/book</span></a></td> <td> Creates new book.</td> </tr>
+        <tr><td> <span class="method">DELETE</span></td> <td><a href="#948281860"><span class=path>/example/book/{id}</span></a></td> <td> Delete book.</td> </tr>
+        <tr><td> <span class="method">GET</span></td> <td><a href="#-323219761"><span class=path>/example/book/{id}</span></a></td> <td> Reads book by id.</td> </tr>
+        <tr><td> <span class="method">PUT</span></td> <td><a href="#-667281848"><span class=path>/example/book/{id}</span></a></td> <td> Update existing book.</td> </tr>
+  	</table>
+    
+  <hr/>
+
+  <div class="rest"> <a id="-1502588249"></a>
+  	<table class="rest-list">
+            <tr>
+                <td> <span class="method">GET</span></td> 
+                <td><span class=path>/example/book</span></td> 
+            </tr>
+  	</table>
+<div class="javadoc">
+<div><b> Search for books.</b>  If both parameters are empty empty list is returned
+</div>
+<div>@param title substring of book title</div>
+<div>@param authorSurname substring of book authod surname</div>
+<div>@return list of books</div>
+</div>
+      
+<div class="annotations">
+<div>@GetMapping(path={"/book"}, produces={"application/json"})</div>
+<div>@ResponseBody</div>
+</div>
+      
+  	<table class="param-list">
+        <tr>
+            <td>Returns:</td> 
+            <td colspan=2>List&lt;<a href="../model/sk.antons.example.spring.model.Book.html">Book</a>&gt.</td> 
+        </tr>
+        <tr>
+            <td>param <b>title</b></td> 
+            <td>String</td> 
+            <td><div class="annotations">
+<div>@RequestParam(name="title", required=false)</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>param <b>authorSurname</b></td> 
+            <td>String</td> 
+            <td><div class="annotations">
+<div>@RequestParam(name="authorSurname", required=false)</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>throws</td> 
+            <td colspan=2></td> 
+        </tr>
+  	</table>
+  </div>
+  <div class="rest"> <a id="-770412163"></a>
+  	<table class="rest-list">
+            <tr>
+                <td> <span class="method">POST</span></td> 
+                <td><span class=path>/example/book</span></td> 
+            </tr>
+  	</table>
+<div class="javadoc">
+<div><b> Creates new book.</b>  Attribute title ia mandatory
+</div>
+<div>@param book book to be created</div>
+<div>@return new created book</div>
+</div>
+      
+<div class="annotations">
+<div>@PostMapping(path={"/book"}, produces={"application/json"})</div>
+<div>@ResponseBody</div>
+</div>
+      
+  	<table class="param-list">
+        <tr>
+            <td>Returns:</td> 
+            <td colspan=2><a href="../model/sk.antons.example.spring.model.Book.html">Book</a></td> 
+        </tr>
+        <tr>
+            <td>param <b>book</b></td> 
+            <td><a href="../model/sk.antons.example.spring.model.Book.html">Book</a></td> 
+            <td><div class="annotations">
+<div>@RequestBody</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>throws</td> 
+            <td colspan=2></td> 
+        </tr>
+  	</table>
+  </div>
+  <div class="rest"> <a id="948281860"></a>
+  	<table class="rest-list">
+            <tr>
+                <td> <span class="method">DELETE</span></td> 
+                <td><span class=path>/example/book/{id}</span></td> 
+            </tr>
+  	</table>
+<div class="javadoc">
+<div><b> Delete book.</b> 
+</div>
+<div>@param id id of book to be deleted</div>
+</div>
+      
+<div class="annotations">
+<div>@DeleteMapping(path={"/book/{id}"})</div>
+</div>
+      
+  	<table class="param-list">
+        <tr>
+            <td>Returns:</td> 
+            <td colspan=2>void</td> 
+        </tr>
+        <tr>
+            <td>param <b>id</b></td> 
+            <td>long</td> 
+            <td><div class="annotations">
+<div>@PathVariable(name="id")</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>throws</td> 
+            <td colspan=2></td> 
+        </tr>
+  	</table>
+  </div>
+  <div class="rest"> <a id="-323219761"></a>
+  	<table class="rest-list">
+            <tr>
+                <td> <span class="method">GET</span></td> 
+                <td><span class=path>/example/book/{id}</span></td> 
+            </tr>
+  	</table>
+<div class="javadoc">
+<div><b> Reads book by id.</b>  Id is mandatory
+</div>
+<div>@param id id of the book.</div>
+<div>@return book with id or null</div>
+</div>
+      
+<div class="annotations">
+<div>@GetMapping(path={"/book/{id}"}, produces={"application/json"})</div>
+<div>@ResponseBody</div>
+</div>
+      
+  	<table class="param-list">
+        <tr>
+            <td>Returns:</td> 
+            <td colspan=2><a href="../model/sk.antons.example.spring.model.Book.html">Book</a></td> 
+        </tr>
+        <tr>
+            <td>param <b>id</b></td> 
+            <td>long</td> 
+            <td><div class="annotations">
+<div>@PathVariable(name="id")</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>throws</td> 
+            <td colspan=2><a href="../model/sk.antons.example.spring.controller.UnknownBookException.html">UnknownBookException</a></td> 
+        </tr>
+  	</table>
+  </div>
+  <div class="rest"> <a id="-667281848"></a>
+  	<table class="rest-list">
+            <tr>
+                <td> <span class="method">PUT</span></td> 
+                <td><span class=path>/example/book/{id}</span></td> 
+            </tr>
+  	</table>
+<div class="javadoc">
+<div><b> Update existing book.</b> 
+</div>
+<div>@param id id of book to be updated</div>
+<div>@param book Data of book to update</div>
+<div>@return updated book</div>
+</div>
+      
+<div class="annotations">
+<div>@PutMapping(path={"/book/{id}"}, produces={"application/json"})</div>
+<div>@ResponseBody</div>
+</div>
+      
+  	<table class="param-list">
+        <tr>
+            <td>Returns:</td> 
+            <td colspan=2><a href="../model/sk.antons.example.spring.model.Book.html">Book</a></td> 
+        </tr>
+        <tr>
+            <td>param <b>id</b></td> 
+            <td>long</td> 
+            <td><div class="annotations">
+<div>@PathVariable(name="id")</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>param <b>book</b></td> 
+            <td><a href="../model/sk.antons.example.spring.model.Book.html">Book</a></td> 
+            <td><div class="annotations">
+<div>@RequestBody</div>
+</div>
+</td> 
+        </tr>
+        <tr>
+            <td>throws</td> 
+            <td colspan=2><a href="../model/sk.antons.example.spring.controller.UnknownBookException.html">UnknownBookException</a></td> 
+        </tr>
+  	</table>
+  </div>
+  <hr/>
+  </div/>
+  </div/>
+ </body>
+</html>
