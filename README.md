@@ -120,3 +120,6 @@
  
  And resulted documentation [here](./example/sb-rest-doclet-example-result/site/apidocs/index-rest.html)
 
+ You can download there files and look for them. You can also build example project and 
+ generate that documentation. (plugin geterate during deploy or directly start plugin mvn clean javadoc:javadoc)
+
