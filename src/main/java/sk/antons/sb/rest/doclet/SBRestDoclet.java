@@ -147,7 +147,7 @@ public class SBRestDoclet implements Doclet {
             
             ControllerFinder controllerfinder = new ControllerFinder();
             List<Element> controllers = controllerfinder.findIn(specifiedElements);
-            note("numner of controllers " + Get.size(controllers));
+            note("number of controllers " + Get.size(controllers));
             //System.out.println(" controllers: " + controllers);
             EndpointFinder endpointfinder = new EndpointFinder();
             List<Element> endpointsElems = endpointfinder.findIn(controllers);
@@ -156,12 +156,12 @@ public class SBRestDoclet implements Doclet {
             for(EndpointWrap endpoint : endpoints) {
                 endpoint.closure();
             }
-            note("numner of endpoints " + Get.size(endpoints));
+            note("number of endpoints " + Get.size(endpoints));
     //        for(String string : env.used()) {
     //            System.out.println(" used --- " +string);
     //        }
             classDb.closure(env);
-            note("numner of model classes " + Get.size(env.used()));
+            note("number of model classes " + Get.size(env.used()));
             note("process model classes...");
             for(String string : env.used()) {
                 processModel(string);
@@ -364,7 +364,7 @@ public class SBRestDoclet implements Doclet {
         file.append(" <div class=\"main-background\">\n");
         file.append("	 \n" );
         file.append("     <div class=\"menu\">\n" );
-        file.append("		 <span class=\"menu-item rests\"><a href=\"../index-rest.html\">controllers</a></span>\n" );
+        file.append("		 <span class=\"menu-item rests\"><a href=\"../index-rest.html\">rest</a></span>\n" );
         file.append("		 <span class=\"menu-item models\"><a href=\"../index-model.html\">model</a></span>\n" );
         file.append("	 </div>\n" );
         file.append("  \n" );
@@ -373,7 +373,7 @@ public class SBRestDoclet implements Doclet {
         file.append("     <hr/>\n" );
         file.append("  \n" );
         file.append("      <div>\n" );
-        file.append("            Root path: <span class=\"path\">").append(wrap.rootPath()).append("</span>\n" );
+        file.append("            root path: <span class=\"path\">").append(wrap.rootPath()).append("</span>\n" );
         file.append("      </div>\n" );
         file.append(wrap.javadoc());
         file.append("\n" );
@@ -411,7 +411,7 @@ public class SBRestDoclet implements Doclet {
                 file.append("      \n" );
                 file.append("  	<table class=\"param-list\">\n" );
                 file.append("        <tr>\n" );
-                file.append("            <td>Returns:</td> \n" );
+                file.append("            <td>returns:</td> \n" );
                 file.append("            <td colspan=2>").append(endpoint.returnTypeAsHtml(false)).append("</td> \n" );
                 file.append("        </tr>\n" );
                 List<VariableWrap> params = endpoint.params();

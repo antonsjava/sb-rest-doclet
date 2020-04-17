@@ -36,13 +36,14 @@ a {
 .method {
   text-align: center;
   margin: 2px 2px 2px 2px;
-  padding: 1px 10px 1px 10px;
+  padding: 3px 10px 3px 10px;
   border-style: solid;
   border-width: 1px;
-  background-color: #9a9abe;
-  font-size: small;
+  color: white;
+  background-color: #777777;
+  font-size: 8px;
   font-weight: bold;
-  width: 50px;
+  width: 60px;
   display: inline-block;
 }
 .header {
@@ -60,7 +61,10 @@ a {
   vertical-align: text-top;
 }
 .javadoc div {
-  padding: 5px 15px 5px 15px;
+  padding: 2px 15px 2px 15px;
+}
+.javadoc {
+  margin: 2px 0px 5px 0px;
 }
 .rest {
   margin: 10px 20px 10px 20px;
@@ -69,8 +73,12 @@ a {
   border-width: 1px;
 }
 .annotations div {
-  padding: 1px 20px 1px 20px;
+  padding: 2px 20px 2px 15px;
   font-size: small;
+  color: #165a19
+}
+.param-list {
+  margin: 10px 20px 10px 20px;
 }
 .param-list tr td {
   padding: 1px 20px 1px 20px;
