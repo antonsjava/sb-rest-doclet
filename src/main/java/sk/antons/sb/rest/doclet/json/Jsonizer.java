@@ -42,7 +42,7 @@ public class Jsonizer {
             String text = om.writeValueAsString(o);
             return text;
         } catch (Exception e) {
-            return "";
+            return "" + e;
         }
     }
 

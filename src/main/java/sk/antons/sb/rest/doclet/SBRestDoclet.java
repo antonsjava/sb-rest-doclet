@@ -523,6 +523,7 @@ public class SBRestDoclet implements Doclet {
                 Object o = Pojo.messer().junk(dl);
                 //String json = Pojo.dumper().jsonPretty(o, "  ");
                 String json = jsonizer.jsonize(o);
+				//if(Is.empty(json)) json = Pojo.dumper().jsonPretty(o, "  ");
                 return json;
             } catch(Throwable ex) {
                 //System.out.println(" class "+fqn+" notexist " + ex);

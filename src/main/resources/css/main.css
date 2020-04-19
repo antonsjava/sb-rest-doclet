@@ -73,9 +73,10 @@ a {
   border-width: 1px;
 }
 .annotations div {
-  padding: 2px 20px 2px 15px;
+  padding: 2px 20px 2px 30px;
+  text-indent: -15px;
   font-size: small;
-  color: #165a19
+  color: #165a19;
 }
 .param-list {
   margin: 10px 20px 10px 20px;

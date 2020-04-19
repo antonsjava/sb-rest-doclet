@@ -42,7 +42,7 @@
            <docletArtifact>
                <groupId>com.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
-               <version>1.0</version>
+               <version>1.2</version>
            </docletArtifact>
        </docletArtifacts>
        <useStandardDocletOptions>true</useStandardDocletOptions>
@@ -70,7 +70,7 @@
            <docletArtifact>
                <groupId>com.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
-               <version>1.0</version>
+               <version>1.2</version>
            </docletArtifact>
        </docletArtifacts>
        <useStandardDocletOptions>true</useStandardDocletOptions>
@@ -98,7 +98,7 @@
            <docletArtifact>
                <groupId>com.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
-               <version>1.0</version>
+               <version>1.2</version>
            </docletArtifact>
            <docletArtifact>
                <groupId>camp.xit.kiwi.msender</groupId>
