@@ -15,12 +15,8 @@
  */
 package sk.antons.sb.rest.doclet;
 
-import com.sun.source.doctree.DocCommentTree;
-import com.sun.source.doctree.DocTree;
-import com.sun.source.util.DocTreeScanner;
 import com.sun.source.util.DocTrees;
 import java.io.File;
-import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,7 +28,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.ElementScanner9;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
@@ -204,6 +199,17 @@ public class SBRestDoclet implements Doclet {
         //System.out.println(" ---- main.css " + css);
         TextFile.save(destination + "/css/main.css", docencoding, css);
     }
+
+    private void header(StringBuilder file, String header) {
+        file.append("\n" );
+        file.append("<div class=\"header\">");
+        file.append("     <div class=\"header-left\">").append(doctitle).append("</div>\n" );
+        file.append("     <div class=\"header-right\">").append(header).append("</div>\n" );
+        file.append("     <div style=\"clear:both;\"></div>");
+        file.append("</div>");
+        file.append("\n" );
+        file.append("     <hr/>\n" );
+    }
     
     private void processModel(String fqn) {
         Cl cl = classDb.get(fqn);
@@ -222,10 +228,7 @@ public class SBRestDoclet implements Doclet {
         file.append("		 <span class=\"menu-item rests\"><a href=\"../index-rest.html\">rest</a></span>\n" );
         file.append("		 <span class=\"menu-item models\"><a href=\"../index-model.html\">model</a></span>\n" );
         file.append("	 </div>\n" );
-        file.append("\n" );
-        file.append("     <div class=\"header\">").append(wrap.simpleName()).append("</div>\n" );
-        file.append("\n" );
-        file.append("     <hr/>\n" );
+        header(file, wrap.simpleName());
         file.append("\n" );
         file.append(wrap.javadoc());
         file.append("\n" );
@@ -294,10 +297,7 @@ public class SBRestDoclet implements Doclet {
         file.append("		 <span class=\"menu-item rests\"><a href=\"./index-rest.html\">rest</a></span>\n" );
         file.append("		 <span class=\"menu-item models\"><a href=\"./index-model.html\">model</a></span>\n" );
         file.append("	 </div>\n" );
-        file.append("  \n" );
-        file.append("     <div class=\"header\">model list</div>\n" );
-        file.append("  \n" );
-        file.append("     <hr/>\n" );
+        header(file, "model list");
         file.append("  \n" );
         file.append("\n" );
         if(!Is.empty(used)) {
@@ -330,9 +330,7 @@ public class SBRestDoclet implements Doclet {
         file.append("		 <span class=\"menu-item models\"><a href=\"./index-model.html\">model</a></span>\n" );
         file.append("	 </div>\n" );
         file.append("  \n" );
-        file.append("     <div class=\"header\">rest list</div>\n" );
-        file.append("  \n" );
-        file.append("     <hr/>\n" );
+        header(file, "rest list");
         file.append("  \n" );
         file.append("\n" );
         if(!Is.empty(elements)) {
@@ -368,9 +366,7 @@ public class SBRestDoclet implements Doclet {
         file.append("		 <span class=\"menu-item models\"><a href=\"../index-model.html\">model</a></span>\n" );
         file.append("	 </div>\n" );
         file.append("  \n" );
-        file.append("     <div class=\"header\">").append(wrap.simpleName()).append("</div>\n" );
-        file.append("  \n" );
-        file.append("     <hr/>\n" );
+        header(file, wrap.simpleName());
         file.append("  \n" );
         file.append("      <div>\n" );
         file.append("            root path: <span class=\"path\">").append(wrap.rootPath()).append("</span>\n" );

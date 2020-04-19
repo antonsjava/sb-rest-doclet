@@ -21,7 +21,14 @@ a {
   background-color: #c4cec4;
 }
 .header {
-  text-align: right;
+  overflow: auto;
+}
+.header-right {
+  float: right;
+}
+.header-left {
+  float: left;
+  font-size: small;
 }
 .menu {
   text-align: center;
@@ -45,9 +52,6 @@ a {
   font-weight: bold;
   width: 60px;
   display: inline-block;
-}
-.header {
-  text-align: right;
 }
 .path {
   font-family: monospace;
