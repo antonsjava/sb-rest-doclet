@@ -44,6 +44,7 @@ public class ControllerWrap extends ElementWrap {
         if(element == null) return "";
         AnnotationMirror requestMapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.RequestMapping");
         String root = ElementHelper.annotationParam(requestMapping, "path");
+        if(Is.empty(root)) root = ElementHelper.annotationParam(requestMapping, "value");
         if(Is.empty(root)) return "";
         return root;
     }

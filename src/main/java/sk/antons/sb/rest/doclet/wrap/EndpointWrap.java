@@ -77,6 +77,7 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
         if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.DeleteMapping");
         if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.PatchMapping");
         root = ElementHelper.annotationParam(mapping, "path");
+        if(Is.empty(root)) root = ElementHelper.annotationParam(mapping, "value");
         if(Is.empty(root)) root = "";
         return root;
     }
