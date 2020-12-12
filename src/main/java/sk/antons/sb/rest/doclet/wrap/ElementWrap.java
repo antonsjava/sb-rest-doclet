@@ -63,9 +63,9 @@ public abstract class ElementWrap {
         if((value2 != null) || (value != null)) {
             html.append("<div>");
             if(value != null) {
-                html.append("<b>");
+                html.append("<span class=\"important\">");
                 html.append(value);
-                html.append("</b>");
+                html.append("</span>");
             }
             if(value2 != null) {
                 html.append(" ");
@@ -77,14 +77,39 @@ public abstract class ElementWrap {
         }
         List<? extends DocTree> list = dcTree.getBlockTags();
         if(!Is.empty(list)) {
+            html.append("<div class=\"javadoc-block\">");
             for(DocTree docTree : list) {
                 html.append("<div>");
-                html.append(docTree);
+                String text = docTree.toString();
+                text = enhanceImportant(text);
+                html.append(text);
                 html.append("</div>\n");
             }
+            html.append("</div>\n");
         }
         html.append("</div>\n");
         return html.toString();
+    }
+
+    private static String enhanceImportant(String value) {
+        if(value == null) return value;
+        value = value.replace("@return", "<span class=\"important\">@return</span>");
+        value = value.replace("@throws", "<span class=\"important\">@throws</span>");
+        int lastpos = 0;
+        int pos = value.indexOf("@param ", lastpos);
+        while(pos > -1) {
+            int pos2 = value.indexOf(" ", pos + 7);
+            if(pos2 > -1) {
+                value = value.substring(0, pos + 7)
+                    + "<span class=\"important\">"
+                    + value.substring(pos + 7, pos2)
+                    + "</span>"
+                    + value.substring(pos2);
+            }
+            lastpos = pos + 8;
+            pos = value.indexOf("@param ", lastpos);
+        }
+        return value;
     }
     
     public String fixannotations(String text) {

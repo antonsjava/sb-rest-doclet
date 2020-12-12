@@ -64,11 +64,17 @@ a {
   border-top: 1px dotted;
   vertical-align: text-top;
 }
-.javadoc div {
-  padding: 2px 15px 2px 15px;
-}
 .javadoc {
-  margin: 2px 0px 5px 0px;
+  margin: 2px 0px 5px 15px;
+}
+.javadoc-block {
+  margin: 5px 0px 5px 20px;
+  font-size: small;
+  border-left-style: dotted;
+  border-left-width: 1px;
+}
+.javadoc-block div {
+  padding: 2px 15px 2px 15px;
 }
 .rest {
   margin: 10px 20px 10px 20px;
@@ -101,4 +107,7 @@ a {
     font-size: small;
     font-family: monospace;
     white-space: pre;
+}
+.important {
+  font-weight: bold;
 }
