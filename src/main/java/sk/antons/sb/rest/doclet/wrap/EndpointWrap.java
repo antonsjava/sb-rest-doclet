@@ -23,6 +23,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
+import sk.antons.jaul.Get;
 import sk.antons.jaul.Is;
 import sk.antons.sb.rest.doclet.ElementHelper;
 
@@ -66,6 +67,7 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
         }
         return sb.toString();
     }
+
     
     private String root = null;
     public String rootPath() {
@@ -76,6 +78,7 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
         if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.PutMapping");
         if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.DeleteMapping");
         if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.PatchMapping");
+        if(mapping == null) mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.RequestMapping");
         root = ElementHelper.annotationParam(mapping, "path");
         if(Is.empty(root)) root = ElementHelper.annotationParam(mapping, "value");
         if(Is.empty(root)) root = "";
@@ -96,6 +99,7 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
     }
     
     private String method = null;
+    public void method(String value) { this.method = value; }
     public String method() {
         if(method != null) return method;
         if(element == null) return "";
@@ -111,6 +115,14 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
         if(mapping != null) return method = "PATCH";
         return method = "";
     }
+    
+    public List<String> methods() {
+        if(element == null) return null;
+        AnnotationMirror mapping = ElementHelper.annotatoonByClass(element, "org.springframework.web.bind.annotation.RequestMapping");
+        if(mapping == null) return null;
+        return ElementHelper.annotationParamValues(mapping, "method");
+    
+    }
 
     @Override
     public int compareTo(EndpointWrap o) {
@@ -124,7 +136,18 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
         List<EndpointWrap> endpoints = new ArrayList<>();
         if(Is.empty(elements)) return endpoints;
         for(Element element : elements) {
-            endpoints.add(EndpointWrap.instance(element, env));
+            EndpointWrap ew = EndpointWrap.instance(element, env);
+            List<String> methods = ew.methods();
+            if(Get.size(methods) > 1) {
+                for(String method : methods) {
+                    method = method.replace("org.springframework.web.bind.annotation.RequestMethod.", "");
+                    EndpointWrap ew2 = EndpointWrap.instance(element, env);
+                    ew2.method(method);
+                    endpoints.add(ew2);
+                }
+            } else {
+                endpoints.add(ew);
+            }
         }
         return endpoints;
     }

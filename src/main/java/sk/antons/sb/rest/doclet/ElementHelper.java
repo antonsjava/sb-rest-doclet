@@ -15,6 +15,7 @@
  */
 package sk.antons.sb.rest.doclet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.lang.model.element.AnnotationMirror;
@@ -52,5 +53,30 @@ public class ElementHelper {
         }
         return rv;
     
+    }
+    public static List<String> annotationParamValues(AnnotationMirror annotation, String name) {
+        List<String> rv = new ArrayList<>();
+        if((annotation != null) && (annotation.getElementValues() != null)) {
+            for(Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry : annotation.getElementValues().entrySet()) {
+                //System.out.println(" -- " + entry.getKey().getSimpleName().toString());
+                if(name.equals(entry.getKey().getSimpleName().toString())) {
+                    Object o = entry.getValue().getValue();
+                    if(o != null) {
+                        if(o instanceof List) {
+                            for(Object object : (List)o) {
+                                String val = object.toString();
+                                if(val.startsWith("\"")) val = val.substring(1, val.length()-1);
+                                rv.add(val);
+                            }
+                        } else {
+                            String val = o.toString();
+                            if(val.startsWith("\"")) val = val.substring(1, val.length()-1);
+                            rv.add(val);
+                        }
+                    }
+                }
+            }
+        }
+        return rv;
     }
 }
