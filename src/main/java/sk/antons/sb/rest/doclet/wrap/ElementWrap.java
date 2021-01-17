@@ -88,7 +88,8 @@ public abstract class ElementWrap {
             html.append("</div>\n");
         }
         html.append("</div>\n");
-        return html.toString();
+        String javadoc = html.toString();
+        return unicodeToHtml(javadoc);
     }
 
     private static String enhanceImportant(String value) {
@@ -138,7 +139,7 @@ public abstract class ElementWrap {
             
         }
         sb.append(text.substring(lastpos));
-        return sb.toString();
+        return unicodeToHtml(sb.toString());
     }
     public String annotations() {
         if(element == null) return "";
@@ -155,7 +156,7 @@ public abstract class ElementWrap {
             html.append("</div>\n");
         }
         html.append("</div>\n");
-        return html.toString();
+        return unicodeToHtml(html.toString());
     }
     
     public String javadocFirst() {
@@ -163,7 +164,12 @@ public abstract class ElementWrap {
         if(dcTree() == null) return "";
 
         String value = toString(dcTree.getFirstSentence());
-        return value;
+        return unicodeToHtml(value);
+    }
+
+    private static String unicodeToHtml(String text) {
+        if(Is.empty(text)) return text;
+        return text.replaceAll("\\\\u(....)", "&#x$1;");
     }
     
     private String toString(List<? extends DocTree> list) {
@@ -175,4 +181,10 @@ public abstract class ElementWrap {
         if(sb.length() == 0 ) return null;
         return Unicode.unescape(sb.toString());
     } 
+
+//    public static void main(String[] argv) {
+//        String text = "Va&#x0161;a zna\\u010dka z vá\\u0161ho systému slú\\u017eiaca na mo\\u017ené párovanie výsledku a ur\\u010dujúc mo\\u017ený dôvod lustrovania v CRE, povinná pre orgán verejnej moci.";
+//        System.out.println(" text1: " + text);
+//        System.out.println(" text2: " + unicodeToHtml(text));
+//    }
 }
