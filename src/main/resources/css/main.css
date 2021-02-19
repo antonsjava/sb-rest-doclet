@@ -94,6 +94,7 @@ a {
 .param-list tr td {
   padding: 1px 20px 1px 20px;
   font-size: small;
+  vertical-align: top;
 }
 .fields table tr td {
   padding: 2px 5px 2px 5px;
