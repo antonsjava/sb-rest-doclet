@@ -96,9 +96,9 @@
        <doclet>sk.antons.sb.rest.doclet.SBRestDoclet</doclet>
        <docletArtifacts>
            <docletArtifact>
-               <groupId>com.github.antonsjava</groupId>
+               <groupId>io.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
-               <version>1.3</version>
+               <version>LASTVERSION</version>
            </docletArtifact>
            <docletArtifact>
                <groupId>camp.xit.kiwi.msender</groupId>
