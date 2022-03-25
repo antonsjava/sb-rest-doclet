@@ -64,7 +64,7 @@
         <dependency>
             <groupId>io.github.antonsjava</groupId>
             <artifactId>jaul</artifactId>
-            <version>1.23</version>
+            <version>1.25</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
