@@ -21,6 +21,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import javax.tools.JavaFileManager;
+import sk.antons.jaul.util.AsRuntimeEx;
 
 /**
  *
@@ -64,7 +65,7 @@ public class ClassResolver {
         try {
             return cl == null ? Class.forName(fqn) : cl.loadClass(fqn);
         } catch(Exception e) {
-            return null;
+            throw AsRuntimeEx.argument(e, "unable to resolve {}", fqn);
         }
     }
     

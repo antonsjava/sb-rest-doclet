@@ -17,6 +17,7 @@ package sk.antons.sb.rest.doclet;
 
 import com.sun.source.util.DocTrees;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -93,16 +94,28 @@ public class SBRestDoclet implements Doclet {
     private String destination;
     private String doctitle;
     private String docencoding;
+    private List<String> include = new ArrayList<>(); // any substring of controller fqn 
+    private List<String> exclude = new ArrayList<>(); // any substring of controller fqn
     WrapEnv env;
     ClDb classDb = new ClDb();
     Messer messer = Pojo.messer();
     Jsonizer jsonizer = Jsonizer.instance();
+
+    private void printConf() {
+        if(destination != null) note("conf destination: " + destination);
+        if(doctitle != null) note("conf title: " + doctitle);
+        if(docencoding != null) note("conf encoding: " + docencoding);
+        if(!include.isEmpty()) note("conf include: " + include);
+        if(!exclude.isEmpty()) note("conf exclude: " + exclude);
+    
+    }
  
     @Override
     public boolean run(DocletEnvironment environment) {
         try {
             
             note("init");
+            printConf();
             //System.out.println(System.getProperties());
             //System.out.println(" ------- BasicDoclet start -----------");
             
@@ -142,6 +155,7 @@ public class SBRestDoclet implements Doclet {
             
             ControllerFinder controllerfinder = new ControllerFinder();
             List<Element> controllers = controllerfinder.findIn(specifiedElements);
+            controllers = filterControllers(controllers);
             note("number of controllers " + Get.size(controllers));
             //System.out.println(" controllers: " + controllers);
             EndpointFinder endpointfinder = new EndpointFinder();
@@ -185,6 +199,43 @@ public class SBRestDoclet implements Doclet {
             note("process failed..." + e);
         }
         return OK;
+    }
+
+    private List<Element> filterControllers(List<Element> list) {
+        if(Is.empty(include) && Is.empty(exclude)) return list;
+        if(Is.empty(list)) return list;
+        List<Element> newlist = new ArrayList<>(); 
+        for(Element element : list) {
+            String fqn = element.asType().toString();
+            boolean includeok = false;
+            boolean excludeok = true;
+            if(!Is.empty(include)) {
+                for(String string : include) {
+                    if(fqn.contains(string)) {
+                        includeok = true;
+                        break;
+                    }
+                }
+            } else {
+                includeok = true;
+            }
+            if(includeok) {
+                if(!Is.empty(exclude)) {
+                    for(String string : exclude) {
+                        if(fqn.contains(string)) {
+                            excludeok = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(includeok && excludeok) {
+                newlist.add(element);
+            } else {
+                note("controller " + fqn + " filtered out");
+            }
+        }
+        return newlist;
     }
 
     private void createFolders() {
@@ -523,7 +574,7 @@ public class SBRestDoclet implements Doclet {
                 return json;
             } catch(Throwable ex) {
                 //System.out.println(" class "+fqn+" notexist " + ex);
-                return "";
+                return "" + ex;
             }
     }
 
@@ -614,6 +665,20 @@ public class SBRestDoclet implements Doclet {
                     @Override
                     public boolean process(String option, List<String> arguments) {
                         doctitle = arguments.get(0);
+                        return OK;
+                    }
+            }
+            , new Option("-exclude", 1, "an excludes", "<string>") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        exclude.add(arguments.get(0));
+                        return OK;
+                    }
+            }
+            , new Option("-include", 1, "an include", "<string>") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        include.add(arguments.get(0));
                         return OK;
                     }
             }

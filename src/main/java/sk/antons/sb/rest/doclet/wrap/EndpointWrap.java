@@ -94,7 +94,10 @@ public class EndpointWrap extends ElementWrap implements Comparable<EndpointWrap
     public String fullRootPath() {
         if(fullRootPath != null) return fullRootPath;
         ControllerWrap cw = ControllerWrap.instance(element.getEnclosingElement(), env);
-        fullRootPath = cw.rootPath() + rootPath();
+        String rpath = cw.rootPath();
+        String path = rootPath();
+        if((rpath != null) && (path != null) && rpath.endsWith("/") && path.startsWith("/")) path = path.substring(1);
+        fullRootPath = rpath + path;
         return fullRootPath;
     }
     
