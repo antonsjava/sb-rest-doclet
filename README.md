@@ -38,15 +38,38 @@
    <version>3.2.0</version>
    <configuration>
        <doclet>sk.antons.sb.rest.doclet.SBRestDoclet</doclet>
+       <docletPath>${basedir}/target/classes</docletPath>
        <docletArtifacts>
            <docletArtifact>
                <groupId>com.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
-               <version>1.3</version>
+               <version>1.13</version>
+           </docletArtifact>
+           <docletArtifact>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>${project.artifactId}</artifactId>
+               <version>${project.version}</version>
            </docletArtifact>
        </docletArtifacts>
+       <!--additionalOptions> some substring of controller fqn if you need filter docdumented controllers
+           -include sk.antons.project.api
+           -exclude AdminController
+       </additionalOptions-->
        <useStandardDocletOptions>true</useStandardDocletOptions>
+       <includeDependencySources>true</includeDependencySources>
+       <dependencySourceIncludes>
+           <dependencySourceInclude>${project.groupId}:${project.artifactId}:${project.version}</dependencySourceInclude>
+       </dependencySourceIncludes>
    </configuration>
+   <executions>
+       <execution>
+           <id>rest-doc</id>
+           <phase>deploy</phase>
+           <goals>
+               <goal>javadoc</goal>
+           </goals>
+       </execution>
+   </executions>
  </plugin>
 ```
 
@@ -66,19 +89,35 @@
    <version>3.2.0</version>
    <configuration>
        <doclet>sk.antons.sb.rest.doclet.SBRestDoclet</doclet>
+       <docletPath>${basedir}/target/classes</docletPath>
        <docletArtifacts>
            <docletArtifact>
                <groupId>com.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
                <version>1.3</version>
            </docletArtifact>
+           <docletArtifact>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>${project.artifactId}</artifactId>
+               <version>${project.version}</version>
+           </docletArtifact>
        </docletArtifacts>
        <useStandardDocletOptions>true</useStandardDocletOptions>
        <includeDependencySources>true</includeDependencySources>
        <dependencySourceIncludes>
+           <dependencySourceInclude>${project.groupId}:${project.artifactId}:${project.version}</dependencySourceInclude>
            <dependencySourceInclude>camp.xit.kiwi.msender:msender-model:*</dependencySourceInclude>
        </dependencySourceIncludes>
    </configuration>
+   <executions>
+       <execution>
+           <id>rest-doc</id>
+           <phase>deploy</phase>
+           <goals>
+               <goal>javadoc</goal>
+           </goals>
+       </execution>
+   </executions>
  </plugin>
 ```
 ## Dummy json examples for model classes
@@ -94,11 +133,17 @@
    <version>3.2.0</version>
    <configuration>
        <doclet>sk.antons.sb.rest.doclet.SBRestDoclet</doclet>
+       <docletPath>${basedir}/target/classes</docletPath>
        <docletArtifacts>
            <docletArtifact>
                <groupId>io.github.antonsjava</groupId>
                <artifactId>sb-rest-doclet</artifactId>
                <version>LASTVERSION</version>
+           </docletArtifact>
+           <docletArtifact>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>${project.artifactId}</artifactId>
+               <version>${project.version}</version>
            </docletArtifact>
            <docletArtifact>
                <groupId>camp.xit.kiwi.msender</groupId>
@@ -109,9 +154,19 @@
        <useStandardDocletOptions>true</useStandardDocletOptions>
        <includeDependencySources>true</includeDependencySources>
        <dependencySourceIncludes>
+           <dependencySourceInclude>${project.groupId}:${project.artifactId}:${project.version}</dependencySourceInclude>
            <dependencySourceInclude>camp.xit.kiwi.msender:msender-model:*</dependencySourceInclude>
        </dependencySourceIncludes>
    </configuration>
+   <executions>
+       <execution>
+           <id>rest-doc</id>
+           <phase>deploy</phase>
+           <goals>
+               <goal>javadoc</goal>
+           </goals>
+       </execution>
+   </executions>
  </plugin>
 ```
 ## Example
